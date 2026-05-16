@@ -89,7 +89,7 @@ internal class WorldSelectorWindows() : Window
     public override void Draw()
     {
         EnsureValidSelectionState();
-        
+
         if (viewMode == SelectorViewMode.Settings)
             DrawSettingsView();
         else

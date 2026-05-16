@@ -14,35 +14,17 @@ using DCTravelerX.Travel.Strategies;
 namespace DCTravelerX.Travel;
 
 internal sealed class TravelSession
+(
+    TravelRequest                           request,
+    ITravelInteraction                      interaction,
+    ITravelContextResolver                  contextResolver,
+    ICooldownGate                           cooldownGate,
+    IOrderMonitor                           orderMonitor,
+    ITravelRetryPolicy                      retryPolicy,
+    IReadOnlyList<ITravelExecutionStrategy> executionStrategies
+)
 {
-    private readonly ITravelInteraction                      interaction;
-    private readonly ITravelContextResolver                  contextResolver;
-    private readonly ICooldownGate                           cooldownGate;
-    private readonly IOrderMonitor                           orderMonitor;
-    private readonly ITravelRetryPolicy                      retryPolicy;
-    private readonly IReadOnlyList<ITravelExecutionStrategy> executionStrategies;
-
-    public TravelSession
-    (
-        TravelRequest                           request,
-        ITravelInteraction                      interaction,
-        ITravelContextResolver                  contextResolver,
-        ICooldownGate                           cooldownGate,
-        IOrderMonitor                           orderMonitor,
-        ITravelRetryPolicy                      retryPolicy,
-        IReadOnlyList<ITravelExecutionStrategy> executionStrategies
-    )
-    {
-        Request                  = request;
-        this.interaction         = interaction;
-        this.contextResolver     = contextResolver;
-        this.cooldownGate        = cooldownGate;
-        this.orderMonitor        = orderMonitor;
-        this.retryPolicy         = retryPolicy;
-        this.executionStrategies = executionStrategies;
-    }
-
-    public TravelRequest Request { get; }
+    public TravelRequest Request { get; } = request;
 
     public TravelState State { get; private set; } = TravelState.Preparing;
 

@@ -15,7 +15,7 @@ internal sealed class DefaultTravelRetryPolicy
 {
     public TravelRetrySettings CreateSettings(TravelRequest request)
     {
-        var enableRetry = !request.IsBack && !request.IsIpcCall && Service.Config.EnableAutoRetry;
+        var enableRetry = request is { IsBack: false, IsIpcCall: false } && Service.Config.EnableAutoRetry;
         return new
         (
             enableRetry,
