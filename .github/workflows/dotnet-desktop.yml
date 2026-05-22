@@ -30,7 +30,7 @@ jobs:
         shell: pwsh
 
       - name: Restore dependencies
-        run: dotnet restore DcTraveler.sln
+        run: dotnet restore DcTraveler.slnx
 
       - name: Build
         run: dotnet build DcTraveler.sln -c Release --no-restore
